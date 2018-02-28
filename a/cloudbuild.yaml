@@ -1,0 +1,13 @@
+steps:
+- name: 'ubuntu'
+  args: ['env']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/a:$SHORT_SHA', '.']
+logsBucket: ruckus-cloudbuilders-logs
+images:
+    - 'gcr.io/$PROJECT_ID/a'
+tags:
+    - 'repo:$REPO_NAME'
+    - 'branch:$BRANCH_NAME'
+    - 'short_sha:$SHORT_SHA'
+    - 'image:a'

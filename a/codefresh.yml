@@ -1,0 +1,17 @@
+version: '1.0'
+steps:
+    BuildingDockerImage:
+        title: Building Docker Image
+        type: build
+        image_name: '${{PROJECT_ID}}/${{A_IMAGE}}'
+        working_directory: ./
+        dockerfile: Dockerfile
+        tag: '${{CF_SHORT_REVISION}}'
+    PushImage:
+        type: push
+        title: Push Image to GCR
+        description: Push Image to GCR
+        candidate: '${{BuildingDockerImage}}'
+        tag: '${{CF_SHORT_REVISION}}'
+        registry: kumo-scratch-gcr
+
